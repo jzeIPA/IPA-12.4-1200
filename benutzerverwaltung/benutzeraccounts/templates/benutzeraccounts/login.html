@@ -1,0 +1,36 @@
+{% extends 'basesite.html' %}
+
+{% block head %}
+  <title>Anmeldung</title>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+  <div class="col-lg-5">
+    <h1 style="margin-bottom: 0.5em">Anmeldung</h1>
+    <p style="margin-bottom: 1.5em;">
+        Geben Sie Ihren E-Mail und und Ihr Passwort ein.
+    </p>
+      <form method="post">
+          {% csrf_token %}
+          
+          <label for="username">E-Mail</label>
+          <input id="username" name="username" type="email" maxlength="50" autofocus="autofocus" required=True unique=True class="form-control">
+          <label style="margin-top: 1em;" for="password">Passwort</label>
+          <input style="margin-bottom: 2em;" id="password" name="password" type="password" maxlength="30" required=True class="form-control">
+
+          <button class="btn btn-success btn-sm" type="submit" value="login">Anmelden</button><br><br>
+
+          <!-- Error-Meldungen-->
+
+          {% if form.errors %}
+            <p class=" label label-danger">
+              Ihre E-Mail-Adresse oder Passwort ist nicht korrekt. Bitte versuchen Sie es erneut.
+            </p><br><br>
+          {% endif %}
+
+
+      </form>
+  </div>
+</div>
+{% endblock %}

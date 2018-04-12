@@ -1,0 +1,81 @@
+{% extends 'basesite.html' %}
+
+{% block head %}
+  <title>Profil bearbeiten</title>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+  <div class="col-lg-12">
+    <h1 style="margin-bottom:0.5em">Profil bearbeiten</h1>
+    <p style="margin-bottom: 0.5em;">
+        Ändern Sie Ihre Daten, um die Korrekthet zu gewährleisten.<br>
+    </p>
+    <p>
+      Mit einem <b>&#10033;</b> gekennzeichnete Felder müssen ausgefüllt werden.
+    </p>
+    <form method="post">
+        {% csrf_token %}
+        <!--{{ user_form }}
+        {{ profile_form }}-->
+
+
+        <table style="float: left; margin-top: 1em; margin-right: 5em;" width="30%">
+          <tr><td><label for="{{ form.salutation.id_for_label }}">Anrede*</label></tr></td> <!--Titel für Platzhalter definieren-->
+          <tr><td>{{ profile_form.salutation }}</td></tr> <!--Platzhalter-->
+
+          <tr><td><label style="margin-top: 1em;" for="{{ form.titel.id_for_label }}">Titel</label></tr></td>
+          <tr><td>{{ profile_form.title }}</td></tr>
+
+          <tr><td><label style="margin-top: 1em;" for="{{ form.last_name.id_for_label }}">Name*</label></tr></td>
+          <tr><td>{{ user_form.last_name }}</td></tr>
+
+          <tr><td><label style="margin-top: 1em;" for="{{ form.first_name.id_for_label }}">Vorname*</label></tr></td>
+          <tr><td>{{ user_form.first_name }}</td></tr>
+
+          <tr><td><label style="margin-top: 1em;" for="{{ form.first_name.id_for_label }}">Geburtsdatum</label></tr></td>
+          <tr><td>{{ profile_form.birthday }}</tr></td>
+
+          <tr><td><label style="margin-top: 1em;" for="{{ form.departement.id_for_label }}">Abteilung</label></tr></td>
+          <tr><td>{{ profile_form.departement }}</tr></td>
+
+          <tr><td><label style="margin-top: 1em;" for="{{ form.rank.id_for_label }}">Rang</label></tr></td>
+          <tr><td>{{ profile_form.rank }}</tr></td>
+        </table>
+
+        <table style="float: left;" width="30%">
+          <tr><td>{{ user_form.email }}</td></tr>
+
+          <tr><td><label style="margin-top: 1em; margin-top: 6.25em;" for="{{ form.phone.id_for_label }}">Telefon</label></tr></td>
+          <tr><td>{{ profile_form.phone }}</td></tr>
+
+          <tr><td><label style="margin-top: 1em;" for="{{ form.fax.id_for_label }}">Fax</label></tr></td>
+          <tr><td>{{ profile_form.fax }}</td></tr>
+
+          <tr><td><label style="margin-top: 1em;" for="{{ form.mobile.id_for_label }}">Mobile</label></tr></td>
+          <tr><td>{{ profile_form.mobile }}</td></tr>
+
+          <tr><td><label style="margin-top: 1em; margin-top: 6.25em;" for="{{ form.activity.id_for_label }}">Tätigkeitsgebiet</label></tr></td>
+          <tr><td>{{ profile_form.activity }}</td></tr>
+
+          <tr><td><label style="margin-top: 1em;" for="{{ form.institute.id_for_label }}">Institut</label></tr></td>
+          <tr><td>{{ profile_form.institute }}</td></tr>
+        </table>
+
+        <div style="clear: both;"></div>
+
+        <button class="btn btn-success btn-sm" type="submit" style="margin-top: 1.5em; margin-bottom: 5em;">Bestätigen</button>
+        <a style="margin-left: 1em; margin-top: 1.5em; margin-bottom: 4.5em;" href="{% url 'user:profile' %}" id="cancel" name="cancel" class="btn btn-default">Abbrechen</button></a>
+
+        <div style="margin-bottom: 1.5em;">
+          {% if form.phone.errors %}
+          <p class="label label-danger">
+            Dieser Benutzername ist bereits vergeben. Bitte versuchen Sie einen anderen.
+          </p>
+          {% endif %}
+        </div>
+
+    </form>
+  </div>
+</div>
+{% endblock %}

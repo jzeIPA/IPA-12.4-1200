@@ -1,0 +1,66 @@
+{% extends 'basesite.html' %}
+
+{% block head %}
+  <title>Profil</title>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+  <div class="col-lg-12">
+    <h1 style="margin-bottom: 0.5em">Profil von {{ user.first_name }} {{ user.last_name }}</h1>
+    <p style="margin-bottom: 1.5em;">
+        Stellen Sie sicher, dass Ihre Daten immer auf den neusten Stand sind.
+    </p>
+
+    <table style="float: left; margin-right: 5em;" width="30%">
+        <tr><td><label>Anrede</label></td></tr>
+        <tr><td><input style="margin-bottom: 1em;" class="form-control" readonly value="{{ user.profile.salutation }}"></input></td></tr>
+
+        <tr><td><label>Titel</label></td></tr>
+        <tr><td><input style="margin-bottom: 1em;" class="form-control" readonly value="{{ user.profile.title }}"></input></td></tr>
+
+        <tr><td><label>Name</label></td></tr>
+        <tr><td><input style="margin-bottom: 1em;" class="form-control" readonly value="{{ user.last_name }}"></input></td></tr>
+
+        <tr><td><label>Vorname</label></td></tr>
+        <tr><td><input style="margin-bottom: 1em;" class="form-control" readonly value="{{ user.first_name }}"></input></td></tr>
+
+        <tr><td><label>Geburtsdatum</label></td></tr>
+        <tr><td><input style="margin-bottom: 1em;" class="form-control" readonly value="{{ user.profile.birthday }}"></input></td></tr>
+
+        <tr><td><label>Abteilung</label></td></tr>
+        <tr><td><input style="margin-bottom: 1em;" class="form-control" readonly value="{{ user.profile.departement }}"></input></td></tr>
+
+        <tr><td><label>Rang</label></td></tr>
+        <tr><td><input style="margin-bottom: 1em;" class="form-control" readonly value="{{ user.profile.rank }}"></input></td></tr>
+    </table>
+
+    <table style="float: left; margin-top: 5.25em;" width="30%">
+        <tr><td><label>E-Mail</label></td></tr>
+        <tr><td><input style="margin-bottom: 1em;" class="form-control" readonly value="{{ user.email }}"></input></td></tr>
+
+        <tr><td><label>Telefon</label></td></tr>
+        <tr><td><input style="margin-bottom: 1em;" class="form-control" readonly value="{{ user.profile.phone }}"></input></td></tr>
+
+        <tr><td><label>Fax</label></td></tr>
+        <tr><td><input style="margin-bottom: 1em;" class="form-control" readonly value="{{ user.profile.fax }}"></input></td></tr>
+
+        <tr><td><label>Mobil</label></td></tr>
+        <tr><td><input style="margin-bottom: 1em;" class="form-control" readonly value="{{ user.profile.mobile }}"></input></td></tr>
+
+        <tr><td><label>Tätigkeit</label></td></tr>
+        <tr><td><input style="margin-bottom: 1em;" class="form-control" readonly value="{{ user.profile.activity }}"></input></td></tr>
+
+        <tr><td><label>Institut</label></td></tr>
+        <tr><td><input style="margin-bottom: 1em;" class="form-control" readonly value="{{ user.profile.institute }}"></input></td></tr>
+    </table>
+
+
+    <div style="clear: both;"></div>
+
+    <div style="margin-top: 1em; margin-bottom: 5em;">
+      <a href="{% url 'user:edit_profile' %}"><button class="btn btn-success btn-sm" type="submit">Profil bearbeiten</button></a>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% load staticfiles %} <!--alle Dateien im static-Ordner laden-->
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+      <link href="{% static 'style.css' %}" rel="stylesheet"></link>    <!--CSS-Einbindung-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      {% block head %}
+        <title>Benutzerverwaltung</title> <!--Titel der Seite (Wird nicht angezeigt)-->
+      {% endblock %}
+  </head>
+  <body>  <!--Grundstruktur der Seite-->
+      <div class="container">
+				<nav class="navbar navbar-default" role="navigation">  <!--Navigation-->
+					<div class="navbar-header">
+        		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-dt">  <!--Button definieren-->
+          		<span class="sr-only">Toggle navigation</span>
+          		<span class="icon-bar"></span>
+          		<span class="icon-bar"></span>
+          		<span class="icon-bar"></span>
+        		</button>
+      		</div>
+  				<div class="collapse navbar-collapse navbar-dt">
+            {% if user.is_authenticated %}  <!--Wenn der Benutzer authentifiziert ist, zeige folgene Seiten an-->
+            	<ul class="nav navbar-nav">
+                <li><a href="{% url 'user:profile' %}">Profil</a></li>
+                <li><a href="{% url 'user:change_password' %}">Passwort ändern</a></li>
+                <li><a href="{% url 'user:logout' %}">Abmelden</a></li> <!--Direkte Weiterleitung zum Login-->
+            	</ul>
+            {% else %}  <!--Ansonsten zeige folgende Seiten an-->
+            	<ul class="nav navbar-nav">
+								<li><a href="{% url 'user:login' %}">Anmelden</a></li>
+								<li><a href="{% url 'user:register' %}">Registrieren</a></li>
+              </ul>
+            {% endif %}
+          </div>
+				</nav>
+			</div>
+
+      {% block body %}
+        <h1>Base</h1>
+      {% endblock %}
+
+			<div class="panel-footer">  <!--Footer fuer ©-->
+				<p style="margin-top: 0.25em;">© SwissBanking 2018. Alle Rechte vorbehalten.</p>
+			</div>
+  </body>
+
+    <!--Javascript fuer Responsive Design-->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</html>

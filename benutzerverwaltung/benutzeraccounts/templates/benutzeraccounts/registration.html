@@ -1,0 +1,116 @@
+{% extends 'basesite.html' %}
+
+{% block head %}
+  <title>Registrierung</title>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+  <div class="col-lg-12">
+    <h1 style="margin-bottom: 0.5em">Registrierung</h1>
+    <p style="margin-bottom: 0.5em;">
+        Mit einem <b>&#10033;</b> gekennzeichnete Felder müssen ausgefüllt werden.
+    </p>
+    <p style="margin-bottom: 1.5em;">
+        Ihr Passwort:
+        <li>muss mindestens acht Zeichen lang sein.
+        <li>darf nicht nur aus Zahlen bestehen.
+        <li>darf nicht zu ähnlich zu Ihren anderen persönlichen Informationen sein.
+        <li>darf nicht allgemein üblich sein.
+    </p>
+
+    <form method="post">
+      {% csrf_token %}
+      <!--{{ form.as_p }}-->
+
+      <table style="float: left; margin-top: 1em; margin-right: 5em;" width="30%">
+        <tr><td><label for="{{ form.salutation.id_for_label }}">Anrede*</label></tr></td> <!--Titel für Platzhalter definieren-->
+        <tr><td>{{ form.salutation }}</td></tr> <!--Platzhalter-->
+
+        <tr><td><label style="margin-top: 1em;" for="{{ form.titel.id_for_label }}">Titel</label></tr></td>
+        <tr><td>{{ form.title }}</td></tr>
+
+        <tr><td><label style="margin-top: 1em;" for="{{ form.username.id_for_label }}">Benutzername*</label></tr></td>
+        <tr><td>{{ form.username }}</td></tr>
+
+        <tr><td><label style="margin-top: 1em;" for="{{ form.last_name.id_for_label }}">Name*</label></tr></td>
+        <tr><td>{{ form.last_name }}</td></tr>
+
+        <tr><td><label style="margin-top: 1em;" for="{{ form.first_name.id_for_label }}">Vorname*</label></tr></td>
+        <tr><td>{{ form.first_name }}</td></tr>
+
+        <tr><td><label style="margin-top: 1em;" for="{{ form.first_name.id_for_label }}">Geburtsdatum</label></tr></td>
+        <tr><td>{{ form.birthday }}</tr></td>
+
+        <tr><td><label style="margin-top: 1em;" for="{{ form.departement.id_for_label }}">Abteilung</label></tr></td>
+        <tr><td>{{ form.departement }}</tr></td>
+
+        <tr><td><label style="margin-top: 1em;" for="{{ form.rank.id_for_label }}">Rang</label></tr></td>
+        <tr><td>{{ form.rank }}</tr></td>
+      </table>
+
+      <table style="float: left;" width="30%">
+        <tr><td><label style="margin-top: 1em;" for="{{ form.email.id_for_label }}">E-Mail*</label></td></tr>
+        <tr><td>{{ form.email }}</td></tr>
+
+        <tr><td><label style="margin-top: 1em;" for="{{ form.phone.id_for_label }}">Telefon</label></tr></td>
+        <tr><td>{{ form.phone }}</td></tr>
+
+        <tr><td><label style="margin-top: 1em;" for="{{ form.fax.id_for_label }}">Fax</label></tr></td>
+        <tr><td>{{ form.fax }}</td></tr>
+
+        <tr><td><label style="margin-top: 1em;" for="{{ form.mobile.id_for_label }}">Mobile</label></tr></td>
+        <tr><td>{{ form.mobile }}</td></tr>
+
+        <tr><td><label style="margin-top: 1em;" for="{{ form.password1.id_for_label }}">Passwort*</label></td></tr>
+        <tr><td>{{ form.password1 }}</td></tr>
+
+        <tr><td><label style="margin-top: 1em;" for="{{ form.password2.id_for_label }}">Passwort bestätigen*</label></td></tr>
+        <tr><td>{{ form.password2 }}</td></tr>
+
+        <tr><td><label style="margin-top: 1em;" for="{{ form.activity.id_for_label }}">Tätigkeitsgebiet</label></tr></td>
+        <tr><td>{{ form.activity }}</td></tr>
+
+        <tr><td><label style="margin-top: 1em;" for="{{ form.institute.id_for_label }}">Institut*</label></tr></td>
+        <tr><td>{{ form.institute }}</td></tr>
+
+      </table>
+
+      <div style="clear: both;"></div>
+
+      <button style="margin-top: 1.75em; margin-bottom: 1.75em;" class="btn btn-success btn-sm" type="submit">Konto erstellen</button>
+      <a style="margin-left: 1em; margin-top: 1.5em; margin-bottom: 1.5em;" href="{% url 'user:login' %}" id="cancel" name="cancel" class="btn btn-default">Abbrechen</button></a>
+
+      <!-- Error-Meldungen-->
+
+
+        <div>
+          <div style="margin-bottom: 1.5em;">
+          {% if form.username.errors %}
+          <p class="label label-danger">
+            Dieser Benutzername ist bereits vergeben. Bitte versuchen Sie einen anderen.
+          </p>
+          {% endif %}
+        </div>
+
+        <div>
+          {% if form.email.errors %}
+          <p class="label label-danger">
+            Diese E-Mail-Adresse ist bereits vergeben. Bitte versuchen Sie eine andere.
+          </p>
+          {% endif %}
+        </div>
+
+        <div style="margin-top: 1em; margin-bottom: 1.5em;">
+          {% if form.password2.errors %}
+          <p class="label label-danger">
+            Ihre Passwörter stimmen nicht überein. Bitte versuchen Sie es erneut.
+          </p>
+          {% endif %}
+        </div>
+
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
